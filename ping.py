@@ -6,14 +6,16 @@ import csv
 import time
 
 url = "http://www.spfld.com/cgi-bin/ping"
+trace_url = "https://api.hackertarget.com/mtr/?q="
 
-hosts = [#enter hosts here
+hosts = [#hosts
 ]
 sizes = ["64", "128", "256", "512", "1024", "2048"]
 for host in hosts:
     query = {'q':host}
     response = requests.request("GET", trace_url, params=query)
     with open('ping_traceroutes.txt','a') as tr_record:
+        tr_record.write("-------------------------\n",host,"Local Time ::",time.strftime("%d %b %Y %H:%M:%S", time.localtime()),"\n")
         tr_record.write(response.text)
     for size in sizes:
         querystring = {"remote_host": host, "dns": "on", "count": "20", "size": size}
@@ -38,4 +40,4 @@ for host in hosts:
                              'RTT Mdev': response.text.splitlines()[i].split('/')[6].split()[0].strip(),
                              'Time': time.strftime("%d %b %Y %H:%M:%S", time.localtime())
                              })
-print('Finished! Check the results in \'pingresults.csv\' Enjoy!!')
+print('Finished! Check the results in \'ping_results.csv\' Enjoy!!')
