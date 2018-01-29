@@ -8,7 +8,8 @@ import time
 url = "http://www.spfld.com/cgi-bin/ping"
 trace_url = "https://api.hackertarget.com/mtr/"
 
-hosts = ["google.com"]
+hosts = ["flipkart.com"#Add more
+        ]
 sizes = ["64", "128", "256", "512", "1024", "2048"]
 for host in hosts:
     query = {'q': host}
@@ -16,7 +17,12 @@ for host in hosts:
     with open('ping_traceroutes.txt', 'a') as tr_record:
         tr_record.write("----------------------------------\n"+host + " Local Time :: " + str(time.strftime("%d %b %Y %H:%M:%S", time.localtime())) + "\n")
         tr_record.write(response.text)
-    print("printed traceroot")
+    print("printed traceroute")
+    ## Because only multiple size data of only one host is required 
+    if(host==hosts[0]):
+        sizes = ["64", "128", "256", "512", "1024", "2048"]
+    else:
+        sizes = ["64"]
     for size in sizes:
         querystring = {"remote_host": host, "dns": "on", "count": "20", "size": size}
         response = requests.request("GET", url, params=querystring)
