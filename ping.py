@@ -8,7 +8,7 @@ import time
 url = "http://www.spfld.com/cgi-bin/ping"
 trace_url = "https://api.hackertarget.com/mtr/"
 
-hosts = ["google.com",##addhostshere
+hosts = ["google.com"##addhostshere
         ]
 sizes = ["64", "128", "256", "512", "1024", "2048"]
 for host in hosts:
