@@ -10,7 +10,6 @@ trace_url = "https://api.hackertarget.com/mtr/"
 
 hosts = ["flipkart.com"#Add more
         ]
-sizes = ["64", "128", "256", "512", "1024", "2048"]
 for host in hosts:
     query = {'q': host}
     response = requests.request("GET", trace_url, params=query)
@@ -50,4 +49,4 @@ for host in hosts:
                              'RTT Mdev': response.text.splitlines()[i].split('/')[6].split()[0].strip()+'ms',
                              'Time': time.strftime("%d %b %Y %H:%M:%S", time.localtime())
                              })
-print('Finished! Check the results in \'ping_results.csv\' and \'ping_traceroutes\' Enjoy!!')
+print('Finished! Check the results in \'ping_results.csv\' and \'ping_traceroutes.txt\' Enjoy!!')
