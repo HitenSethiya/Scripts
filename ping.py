@@ -11,6 +11,10 @@ hosts = [#enter hosts here
 ]
 sizes = ["64", "128", "256", "512", "1024", "2048"]
 for host in hosts:
+    query = {'q':host}
+    response = requests.request("GET", trace_url, params=query)
+    with open('ping_traceroutes.txt','a') as tr_record:
+        tr_record.write(response.text)
     for size in sizes:
         querystring = {"remote_host": host, "dns": "on", "count": "20", "size": size}
         response = requests.request("GET", url, params=querystring)
