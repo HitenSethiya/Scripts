@@ -7,8 +7,8 @@ import time
 
 url = "http://www.spfld.com/cgi-bin/ping"
 
-hosts = ["google.com", "webmail.iitg.ac.in", "amazon.co.uk", "facebook.com", "wikipedia.com", "yandex.com",
-         "baidu.com", "flipkart.com"]
+hosts = [#enter hosts here
+]
 sizes = ["64", "128", "256", "512", "1024", "2048"]
 for host in hosts:
     for size in sizes:
