@@ -4,9 +4,18 @@
 import requests
 import csv
 import time
+import matplotlib.pyplot as plt
 
 url = "http://www.spfld.com/cgi-bin/ping"
 trace_url = "https://api.hackertarget.com/mtr/?q="
+
+def getColumn(filename, column, host):
+    results = csv.reader(open(filename), dialect='excel')
+    req = []
+    for result in results:
+    	if host in result[0] and result[0] is not None:
+    		req.append(result[column])
+    return req
 
 hosts = [#hosts
 ]
@@ -41,3 +50,15 @@ for host in hosts:
                              'Time': time.strftime("%d %b %Y %H:%M:%S", time.localtime())
                              })
 print('Finished! Check the results in \'ping_results.csv\' Enjoy!!')
+
+
+for host in hosts:
+	frame_size = getColumn("ping_results.csv",1,host)
+	rtt_Avg = getColumn("ping_results.csv",3,host)
+	plt.plot(frame_size,rtt_Avg,color='green', linestyle='dashed', linewidth = 3,
+         marker='o', markerfacecolor='blue', markersize=12)
+	plt.xlabel('Frame size')
+	plt.ylabel('Average RTT')
+	plt.title('Plot for '+host)
+	plt.savefig(host[:-4])
+	plt.clf()
